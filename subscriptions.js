@@ -1,4 +1,3 @@
-<script>
   var Webflow = Webflow || [];
   Webflow.push(function() {
     $(document).off('submit');
@@ -108,4 +107,3 @@
       });
     });
   });
-</script>
