@@ -8,7 +8,7 @@
     slct.selectedIndex = 1;
     var cbInstance = Chargebee.init({
         site: "clearestimates-test",
-        publishableKey: "test_NLnmWzIrJCKIUfkNfirdY7x5JUQfhmHI",//"test_IGqLcu0CiVF680fn1s5BQNU8LxgycVDyQ",
+        publishableKey: "test_IGqLcu0CiVF680fn1s5BQNU8LxgycVDyQ",
         domain: "https://newsite.clearestimates.com"//"https://clear-estimates.webflow.io"
     });
     var options={fonts:['https://fonts.googleapis.com/css2?family=Inter&display=swap'],classes:{focus:'focus',invalid:'invalid',empty:'empty',complete:'complete'},placeholder:{number:'1111 1111 1111 1111',expiry:'MM / YY',cvv:'CVV'},style:{base:{color:'#333',fontWeight:'400',fontFamily:'Inter, sans-serif',fontSize:'16px',fontSmoothing:'antialiased',lineHeight:'19px','::placeholder':{color:'#828282'}},invalid:{color:'#E94745',':focus':{color:'#e44d5f'},'::placeholder':{color:'#FFCCA5'}}}};
@@ -78,7 +78,7 @@
             if(data.coupon !== "") par.append("coupon", data.coupon);
             par.append("card[tmp_token]", response.token);            
             let requestOptions = { method: 'POST', headers: myHeaders, body: par };
-            fetch("https://webflow.clearestimates.com/ce-chargebee/subscriptions", requestOptions)
+            fetch("https://webflow.clearestimates.com/stripe/subscriptions", requestOptions)
               .then(response => {
               let json = response.json();
               console.log(json);
