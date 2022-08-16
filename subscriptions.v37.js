@@ -2,6 +2,23 @@
   Webflow.push(function() {
     $(document).off('submit');
     $(document).ready(function () {
+
+    // create a date estimate for the subscription trial end date
+    function addMonths(numOfMonths, date = new Date()) {
+          date.setMonth(date.getMonth() + numOfMonths);
+        
+          return date;
+      };
+      
+      let newDate = addMonths(1);
+      const estimateMonth = newDate.toLocaleString('default', { month: 'short' });
+      
+      let dateStringText = `${estimateMonth} ${newDate.getDate()}, ${newDate.getFullYear()}`
+           
+      const dateSpan = $('.trial-estimate-date');
+      dateSpan.text(dateStringText);
+    // end trial end date estimate calculation
+
     $('#phone').mask('(000) 000-0000', { clearIfNotMatch: true });
     $('#zip').mask('00000-ZZZZ', { translation: { 'Z': { pattern: /[0-9]/, optional: true } } });
     let cntr = {US:"United States of America"};
