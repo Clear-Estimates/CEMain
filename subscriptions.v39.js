@@ -12,7 +12,6 @@
       
       let newDate = addMonths(1);
       const estimateMonth = newDate.toLocaleString('default', { month: 'short' });
-      
       let dateStringText = `${estimateMonth} ${newDate.getDate()}, ${newDate.getFullYear()}`
            
       const dateSpan = $('.trial-estimate-date');
@@ -80,6 +79,7 @@
             par.append("customer[first_name]", data.first_name);
             par.append("customer[last_name]", data.last_name);
             par.append("customer[email]", data.email);
+            par.append("customer[cf_business_type]", data.business_type);
             if(data.phone !== "") par.append("customer[phone]", data.phone);
             par.append("billing_address[first_name]", data.first_name);
             par.append("billing_address[last_name]", data.last_name);
@@ -92,6 +92,26 @@
             par.append("customer[auto_collection]", "on");
             if(data.coupon !== "") par.append("coupon", data.coupon);
             par.append("token_id", response.token);
+              
+            // List possible parameters to look for
+            let extraParamArray = [
+              'utm_device',
+              'utm_medium',
+              'utm_source',
+              'utm_term',
+              'utm_content',
+              'utm_campaign',
+              'utm_adgroup'];
+
+            // get utm parameters and other information as needed from purser which is installed on all pages of the site
+            const purserObject = window.purser.fetch();
+
+            // loop through array of possible parameters from the purser object
+            extraParamArray.forEach((x) => {
+              // check that the property exists, then append its value to the url along with other variables. In chargebee they are prepended with 'cf_' for 'custom field'
+              purserObject.hasOwnProperty(x) && par.append(`cf_${x}`, purserObject[x]) 
+            })
+
             let requestOptions = { method: 'POST', headers: myHeaders, body: par };
                 fetch(ceproxydomain, requestOptions)
               .then(response => {
