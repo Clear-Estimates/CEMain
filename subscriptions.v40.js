@@ -35,7 +35,7 @@
         publishableKey: "live_3V5PE3cn04MqdLrPbcdoPS4yeafoxX1aK",
         domain: cedomain
     });
-    var options={fonts:['https://fonts.googleapis.com/css2?family=Inter&display=swap'],classes:{focus:'focus',invalid:'invalid',empty:'empty',complete:'complete'},placeholder:{number:'1111 1111 1111 1111',expiry:'MM / YY',cvv:'CVV'},style:{base:{color:'#333',fontWeight:'400',fontFamily:'Inter, sans-serif',fontSize:'16px',fontSmoothing:'antialiased',lineHeight:'19px','::placeholder':{color:'#828282'}},invalid:{color:'#E94745',':focus':{color:'#e44d5f'},'::placeholder':{color:'#FFCCA5'}}}};
+    var options = {currency: 'USD',fonts:['https://fonts.googleapis.com/css2?family=Inter&display=swap'],classes:{focus:'focus',invalid:'invalid',empty:'empty',complete:'complete'},placeholder:{number:'1111 1111 1111 1111',expiry:'MM / YY',cvv:'CVV'},style:{base:{color:'#333',fontWeight:'400',fontFamily:'Inter, sans-serif',fontSize:'16px',fontSmoothing:'antialiased',lineHeight:'19px','::placeholder':{color:'#828282'}},invalid:{color:'#E94745',':focus':{color:'#e44d5f'},'::placeholder':{color:'#FFCCA5'}}}};
     cbInstance.load("components").then(() => {
         var cardComponent = cbInstance.createComponent("card", options);
         var numberField = cardComponent.createField("number").at("#card-number");
@@ -91,7 +91,7 @@
             par.append("billing_address[country]", data.country);
             par.append("customer[auto_collection]", "on");
             if(data.coupon !== "") par.append("coupon", data.coupon);
-            //par.append("token_id", response.token);
+            par.append("token_id", response.token);
             let requestOptions = { method: 'POST', headers: myHeaders, body: par };
                 fetch(ceproxydomain, requestOptions)
               .then(response => {
