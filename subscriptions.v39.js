@@ -12,8 +12,7 @@
       
       let newDate = addMonths(1);
       const estimateMonth = newDate.toLocaleString('default', { month: 'short' });
-      
-      let dateStringText = '${estimateMonth} ${newDate.getDate()}, ${newDate.getFullYear()}'
+      let dateStringText = `${estimateMonth} ${newDate.getDate()}, ${newDate.getFullYear()}`
            
       const dateSpan = $('.trial-estimate-date');
       dateSpan.text(dateStringText);
@@ -35,9 +34,6 @@
         publishableKey: "live_3V5PE3cn04MqdLrPbcdoPS4yeafoxX1aK",
         domain: cedomain
     });
-      
-      
-      
     var options={fonts:['https://fonts.googleapis.com/css2?family=Inter&display=swap'],classes:{focus:'focus',invalid:'invalid',empty:'empty',complete:'complete'},placeholder:{number:'1111 1111 1111 1111',expiry:'MM / YY',cvv:'CVV'},style:{base:{color:'#333',fontWeight:'400',fontFamily:'Inter, sans-serif',fontSize:'16px',fontSmoothing:'antialiased',lineHeight:'19px','::placeholder':{color:'#828282'}},invalid:{color:'#E94745',':focus':{color:'#e44d5f'},'::placeholder':{color:'#FFCCA5'}}}};
     cbInstance.load("components").then(() => {
         var cardComponent = cbInstance.createComponent("card", options);
@@ -93,30 +89,28 @@
             par.append("billing_address[state]", data.state);
             par.append("billing_address[zip]", data.zip);
             par.append("billing_address[country]", data.country);
-              par.append("customer[auto_collection]", "on");
-
-            
+            par.append("customer[auto_collection]", "on");
             if(data.coupon !== "") par.append("coupon", data.coupon);
-              par.append("token_id", response.token);
+            par.append("token_id", response.token);
               
-              // List possible parameters to look for
-              let extraParamArray = [
-                'utm_device',
-                'utm_medium',
-                'utm_source',
-                'utm_term',
-                'utm_content',
-                'utm_campaign',
-                'utm_adgroup'];
-              
-              // get utm parameters and other information as needed from purser which is installed on all pages of the site
-              const purserObject = window.purser.fetch();
+            // List possible parameters to look for
+            let extraParamArray = [
+              'utm_device',
+              'utm_medium',
+              'utm_source',
+              'utm_term',
+              'utm_content',
+              'utm_campaign',
+              'utm_adgroup'];
 
-              // loop through array of possible parameters from the purser object
-              extraParamArray.forEach((x) => {
-                // check that the property exists, then append its value to the url along with other variables. In chargebee they are prepended with 'cf_' for 'custom field'
-                purserObject.hasOwnProperty(x) && par.append(`cf_${x}`, purserObject[x]) 
-              })
+            // get utm parameters and other information as needed from purser which is installed on all pages of the site
+            const purserObject = window.purser.fetch();
+
+            // loop through array of possible parameters from the purser object
+            extraParamArray.forEach((x) => {
+              // check that the property exists, then append its value to the url along with other variables. In chargebee they are prepended with 'cf_' for 'custom field'
+              purserObject.hasOwnProperty(x) && par.append(`cf_${x}`, purserObject[x]) 
+            })
 
             let requestOptions = { method: 'POST', headers: myHeaders, body: par };
                 fetch(ceproxydomain, requestOptions)
