@@ -105,7 +105,8 @@
                 'utm_term',
                 'utm_content',
                 'utm_campaign',
-                'utm_adgroup'];
+                'utm_adgroup',
+                'gclid'];
             // get utm parameters and other information as needed from purser which is installed on all pages of the site
             const purserObject = window.purser.fetch();
             // loop through array of possible parameters from the purser object
