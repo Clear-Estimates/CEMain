@@ -89,10 +89,12 @@
                 url: cbgetcustomerurl,
                 dataType: 'json',
                 headers: {
-                    "Authorization": "Basic " + btoa("live_o5QtQkI1l71FdTp731uX7RcyoDPDUFBZ:")
+                    "Authorization": "Basic " + btoa("live_o5QtQkI1l71FdTp731uX7RcyoDPDUFBZ:"),
+                    "Access-Control-Allow-Origin": "*"
                 },
                 //beforeSend: function (xhr) {
                 //    xhr.setRequestHeader("Authorization", "Basic " + btoa("live_o5QtQkI1l71FdTp731uX7RcyoDPDUFBZ:"));
+                //    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
                 //},
                 error: function (xhr, status, error) {
                     console.log(error + "\r\n" + xhr.responseText + ' - ' + xhr.statusText);
