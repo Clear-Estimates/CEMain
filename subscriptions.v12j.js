@@ -216,6 +216,7 @@ Webflow.push(function () {
                     }
                 })
                 objSubscription.CustomValues = listCustomValues;
+                console.log("createsubscription req:" + JSON.stringify(objSubscription));
                 $.post(cbRegApiUrl + "createsubscription", objSubscription, function (resp) {
                     console.log("createsubscription resp:" + JSON.stringify(resp));
                     if (resp.success) {
